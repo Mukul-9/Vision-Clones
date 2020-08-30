@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import "./TweetBox.css";
 import { Avatar, Button } from "@material-ui/core";
 import db from "./firebase";
+import firebase from "firebase";
+
 function TweetBox() {
   const [tweetMessage, settweetMessage] = useState("");
   const [tweetImage, settweetImage] = useState("");
@@ -10,12 +12,14 @@ function TweetBox() {
     e.preventDefault();
 
     db.collection("posts").add({
-      displayName: "sadf",
-      username: "sdfsdf",
+      displayName: "Mukul",
+      username: "Holy_Geek_",
       verified: true,
       text: tweetMessage,
       image: tweetImage,
-      avatar: "",
+      avatar:
+        "https://i.pinimg.com/originals/8e/20/e1/8e20e10ee0a3819332944e5096e3bbb2.jpg",
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
     settweetImage("");
     settweetMessage("");
