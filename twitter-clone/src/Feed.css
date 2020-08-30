@@ -19,6 +19,7 @@
   font-size: 20px;
   font-weight: 800;
 }
+
 .feed::-webkit-scrollbar {
   display: none;
 }
