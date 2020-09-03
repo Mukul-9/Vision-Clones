@@ -17,6 +17,7 @@ function Product({ id, title, price, rating, image }) {
       },
     });
   };
+
   return (
     <div className="product" id={id}>
       <div className="product__info">

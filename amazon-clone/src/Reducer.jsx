@@ -3,21 +3,26 @@ export const initialState = {
   user: null,
 };
 
-function reducer(state, action) {
+export const getBasketTotal = (basket) =>
+  basket?.reduce((amount, item) => item.price + amount, 0);
+
+const reducer = (state, action) => {
   console.log(action);
+
   switch (action.type) {
     case "ADD_TO_BASKET":
       return {
         ...state,
         basket: [...state.basket, action.item],
       };
+
     case "ROMOVE_FROM_BASKET":
       let newBasket = [...state.basket];
       const index = state.basket.findIndex(
         (basketItem) => basketItem.id === action.id
       );
       if (index >= 0) {
-        newBasket.aplice(index, 1);
+        newBasket.splice(index, 1);
       } else {
         console.warn(
           `can't remove product ${action.id} as it's no longer in the cart!`
@@ -28,6 +33,6 @@ function reducer(state, action) {
     default:
       return state;
   }
-}
+};
 
 export default reducer;
