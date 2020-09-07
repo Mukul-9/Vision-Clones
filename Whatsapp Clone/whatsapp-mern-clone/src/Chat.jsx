@@ -4,11 +4,23 @@ import { Avatar, IconButton } from "@material-ui/core";
 import { SearchOutlined, AttachFile, MoreVert } from "@material-ui/icons";
 import InsertEmoticonIcon from "@material-ui/icons/InsertEmoticon";
 import MicIcon from "@material-ui/icons/Mic";
+import axios from "./axios";
 
-function Chat({ value }) {
+function Chat({ messages }) {
   const [input, setInput] = useState("");
 
-  const sendMessage = () => {};
+  const sendMessage = async (e) => {
+    e.preventDefault();
+
+    await axios.post("./messages/new", {
+      message: input,
+      name: "mukul",
+      timestamp: "9:50",
+      received: false,
+    });
+
+    setInput("");
+  };
 
   return (
     <div className="chat">
@@ -33,20 +45,15 @@ function Chat({ value }) {
       </div>
 
       <div className="chat__body">
-        <p className="chat__message">
-          <span className="chat__name">Kislay</span>First Message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-
-        <p className="chat__message chat__receiver">
-          <span className="chat__name">Mukul</span>Second Message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
-
-        <p className="chat__message">
-          <span className="chat__name">Vaibhav</span>Third Message
-          <span className="chat__timestamp">{new Date().toUTCString()}</span>
-        </p>
+        {messages.map((message) => (
+          <p
+            className={`chat__message ${!message.received && "chat__receiver"}`}
+          >
+            <span className="chat__name">{message.name}</span>
+            {message.message}
+            <span className="chat__timestamp">{message.timestamp}</span>
+          </p>
+        ))}
       </div>
 
       <div className="chat__footer">
@@ -56,7 +63,7 @@ function Chat({ value }) {
           <input
             type="text"
             value={input}
-            onChange={(e) => setInput(e.target, value)}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Type a message"
           />
           <button onClick={sendMessage} type="submit">
