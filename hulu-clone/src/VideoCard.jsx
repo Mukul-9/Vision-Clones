@@ -16,7 +16,7 @@ const VideoCard = forwardRef(({ movie }, ref) => {
         truncateText="..."
         text={movie.overview}
       />
-      <h2>{movie.original_title}</h2>
+      <h2>{movie.title}</h2>
       <h4>Rating: {movie.vote_average}</h4>
     </div>
   );
