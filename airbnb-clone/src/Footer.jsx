@@ -3,7 +3,8 @@ import "./Footer.css";
 function Footer() {
   return (
     <div className="footer">
-      <h1>I am the footer</h1>
+      <p>© 2020 Airbnb clone! No rights reserved! This is just a demo!</p>
+      <p>Privacy . Terms . Sitemap . Company Details</p>
     </div>
   );
 }
