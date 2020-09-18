@@ -9,7 +9,7 @@ import ChatInput from "./ChatInput";
 
 function Chat() {
   const { roomId } = useParams();
-  const [roomDetails, setRoomDetails] = useState(null);
+  const [roomDetails, setRoomDetails] = useState([]);
   const [roomMessages, setRoomMessages] = useState([]);
 
   useEffect(() => {
@@ -27,7 +27,6 @@ function Chat() {
         setRoomMessages(snapshot.docs.map((doc) => doc.data()))
       );
   }, [roomId]);
-  console.log(roomDetails);
   console.log("MESSAGES>>>>>", roomMessages);
 
   return (
